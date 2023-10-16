@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora de Notas</title>
+    <script src="java.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        color: white;
+      }
+      .container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        background-color: #000030;
+        text-align: center;
+        align-items: center;
+      }
+      label {
+        font-weight: bold;
+      }
+
+      input {
+        width: 50%;
+        margin-bottom: 30px;
+        padding: 4px;
+      }
+      button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+      .largura-personalizada {
+        width: 200px;
+      }
+      button:hover {
+        background-color: green;
+      }
+      #resultado {
+        font-weight: bold;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Calculadora de Notas</h1>
+      <br /><label for="nota1">1º Trimestre - Prova:</label> <br /><input
+        type="number"
+        id="nota1"
+        min="0"
+        max="10"
+        step="0.01"
+      />
+      <br /><label for="recuperacao1">1º Trimestre - Recuperação:</label>
+      <input type="number" id="recuperacao1" min="0" max="10" step="0.01" />
+      <br /><label for="nota2">2º Trimestre - Prova:</label> <br /><input
+        type="number"
+        id="nota2"
+        min="0"
+        max="10"
+        step="0.01"
+      />
+      <br /><label for="recuperacao2">2º Trimestre - Recuperação:</label>
+      <input type="number" id="recuperacao2" min="0" max="10" step="0.01" />
+      <br />
+      <label for="nota3">3º Trimestre - Prova:</label> <br /><input
+        type="number"
+        id="nota3"
+        min="0"
+        max="10"
+        step="0.01"
+      />
+      <br /><label for="recuperacao3">3º Trimestre - Recuperação:</label>
+      <br /><input
+        type="number"
+        id="recuperacao3"
+        min="0"
+        max="10"
+        step="0.01"
+      />
+      <br /><button id="calcular-btn">Calcular Notas Finais</button>
+      <div id="resultado"></div>
+    </div>
+
+    <script>
+      document
+        .getElementById("calcular-btn")
+        .addEventListener("click", calcularNotasFinais);
+
+      function calcularNotasFinais() {
+        // Obter notas e recuperações de cada trimestre
+        const nota1 = parseFloat(document.getElementById("nota1").value) || 0;
+        const recuperacao1 =
+          parseFloat(document.getElementById("recuperacao1").value) || 0;
+        const nota2 = parseFloat(document.getElementById("nota2").value) || 0;
+        const recuperacao2 =
+          parseFloat(document.getElementById("recuperacao2").value) || 0;
+        const nota3 = parseFloat(document.getElementById("nota3").value) || 0;
+        const recuperacao3 =
+          parseFloat(document.getElementById("recuperacao3").value) || 0;
+
+        // Calcular notas finais usando a maior nota (prova ou recuperação) de cada trimestre
+        const final1 = Math.max(nota1, recuperacao1);
+        const final2 = Math.max(nota2, recuperacao2);
+        const final3 = Math.max(nota3, recuperacao3);
+
+        //calcuçlar a nota final
+        const notaFinalMedia = (final1 + final2 + final3) / 3;
+
+        // Exibir resultados
+        document.getElementById("resultado").innerHTML = `
+                <p>1º Trimestre - Nota Final: ${final1.toFixed(2)}</p>
+                <p>2º Trimestre - Nota Final: ${final2.toFixed(2)}</p>
+                <p>3º Trimestre - Nota Final: ${final3.toFixed(2)}</p>
+
+            `;
+      }
+    </script>
+  </body>
+</html>
